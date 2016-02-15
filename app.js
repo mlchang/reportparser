@@ -8,7 +8,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var csv = require('csv-parser');
 var fs = require('fs');
-
+var XLSX = require('xlsx');
 
 
 var app = express();
@@ -34,48 +34,8 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-/**
-if(typeof require !== 'undefined') XLSX = require('xlsx');
-var workbook = XLSX.readFile(path.join(__dirname, '/reports/hm.xlsx'));
-console.log(workbook);
-**/
-
-// INVOCA
-var invoca = new Array();
-
-fs.createReadStream('reports/invoca.csv')
-  .pipe(csv())
-  .on('data', function(data) {
-    console.log('row', data);
-    invoca.push(data);
-  })
-
-// END INVOCA
-
-
-// MEDIA ALPHA
-var mediaalpha = new Array();
-
-fs.createReadStream('reports/mediaalpha.csv')
-  .pipe(csv())
-  .on('data', function(data) {
-    console.log('row', data);
-    mediaalpha.push(data);
-  })
-
-// END MEDIA ALPHA
-
-// AGILE
-var agile = new Array();
-
-fs.createReadStream('reports/agile.csv')
-  .pipe(csv())
-  .on('data', function(data) {
-    console.log('row', data);
-    agile.push(data);
-  })
-
-// END AGILE
+//parseCSVReports();
+this.parseXLSXReports();
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname + '/public/index.html'));
@@ -128,6 +88,47 @@ module.exports = app;
 
 
 
-var parseReports = function(){
+var parseCSVReports = function(){
+// Invoca
+var invoca = new Array();
 
+fs.createReadStream('reports/invoca.csv')
+  .pipe(csv())
+  .on('data', function(data) {
+    console.log('row', data);
+    invoca.push(data);
+  })
+// End Invoca 
+
+
+// Media Alpha
+var mediaalpha = new Array();
+//not absolutely coming in correctly need to tweak the header of the table
+fs.createReadStream('reports/mediaalpha.csv')
+  .pipe(csv())
+  .on('data', function(data) {
+    console.log('row', data);
+    mediaalpha.push(data);
+  })
+// End Media Alpha
+
+// Agile
+var agile = new Array();
+
+fs.createReadStream('reports/agile.csv')
+  .pipe(csv())
+  .on('data', function(data) {
+    console.log('row', data);
+    agile.push(data);
+  })
+// End Agile
+}
+
+
+var parseXLSXReports = function(){
+  // E-Health
+  var workbook = XLSX.readFile(path.join(__dirname, 'ehealth.xls'));
+  console.log(workbook);
+
+  //
 }
