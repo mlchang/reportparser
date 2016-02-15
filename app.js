@@ -34,20 +34,49 @@ app.use(function(req, res, next) {
   next(err);
 });
 
+/**
 if(typeof require !== 'undefined') XLSX = require('xlsx');
 var workbook = XLSX.readFile(path.join(__dirname, '/reports/hm.xlsx'));
 console.log(workbook);
+**/
 
 // INVOCA
-/*
+var invoca = new Array();
+
 fs.createReadStream('reports/invoca.csv')
   .pipe(csv())
   .on('data', function(data) {
     console.log('row', data);
+    invoca.push(data);
   })
-*/
 
-//
+// END INVOCA
+
+
+// MEDIA ALPHA
+var mediaalpha = new Array();
+
+fs.createReadStream('reports/mediaalpha.csv')
+  .pipe(csv())
+  .on('data', function(data) {
+    console.log('row', data);
+    mediaalpha.push(data);
+  })
+
+// END MEDIA ALPHA
+
+// AGILE
+var agile = new Array();
+
+fs.createReadStream('reports/agile.csv')
+  .pipe(csv())
+  .on('data', function(data) {
+    console.log('row', data);
+    agile.push(data);
+  })
+
+// END AGILE
+
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname + '/public/index.html'));
 });
@@ -82,3 +111,23 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var parseReports = function(){
+
+}
