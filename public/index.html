@@ -3,19 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <title>Sample Site</title>
-
+    <link rel="stylesheet" href="/stylesheets/dropzone.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <style>
         body { padding-top:50px; }
     </style>
+    <script type="text/javascript" src="/javascripts/dropzone.js"></script>
 </head>
 <body>
 
     <div class="container">
         <div class="jumbotron">
-            <h1>Hello World!</h1>
+            <h1>HealthNetWork Revenue Reporting</h1>
         </div>
-    </div>
     
+        <form id="upload-widget" method="post" action="/upload" class="dropzone">
+        </form>
+    </div>
+
 </body>
 </html>
