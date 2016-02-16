@@ -33,9 +33,102 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
+app.set('view engine', 'html');
+/*
+* PARSE EXCEL FILES
+*/
 
-//parseCSVReports();
-this.parseXLSXReports();
+
+var ehealthWB = XLSX.readFile(path.join(__dirname, 'reports/ehealth.xls'));
+var ehealthfirstsheet = ehealthWB.SheetNames[0];
+var ehealthworksheet = ehealthWB.Sheets[ehealthfirstsheet];
+var ehealthArray = XLSX.utils.sheet_to_json(ehealthworksheet, {raw: true});
+
+var hmWB = XLSX.readFile(path.join(__dirname, 'reports/healthmarkets.xlsx'));
+var hmfirstsheet = hmWB.SheetNames[4];
+var hmworksheet = hmWB.Sheets[hmfirstsheet];
+var hmArray = XLSX.utils.sheet_to_json(hmworksheet, {raw: true});
+
+var kelseyWB = XLSX.readFile(path.join(__dirname, 'reports/kelsey.xlsx'));
+var kelseyfirstsheet = kelseyWB.SheetNames[0];
+var kelseyworksheet = kelseyWB.Sheets[kelseyfirstsheet];
+var kelseyArray = XLSX.utils.sheet_to_json(kelseyworksheet, {raw: true});
+
+var katchWB = XLSX.readFile(path.join(__dirname, 'reports/katch.xlsx'));
+var katchfirstsheet = katchWB.SheetNames[0];
+var katchworksheet = katchWB.Sheets[katchfirstsheet];
+var katchArray = XLSX.utils.sheet_to_json(katchworksheet, {raw: true});
+
+var gohealthWB = XLSX.readFile(path.join(__dirname, 'reports/gohealth.xlsx'));
+var gohealthfirstsheet = gohealthWB.SheetNames[0];
+var gohealthworksheet = gohealthWB.Sheets[gohealthfirstsheet];
+var gohealthArray = XLSX.utils.sheet_to_json(gohealthworksheet, {raw: true});
+
+
+//apps/ submitted apps/ paid per row
+//leads/ number of people that have filled out a lead formt hat were transfered to health, possible money.
+//grand total 
+
+/**
+* function to convert XLSX to JSON
+*/
+function XLSXtoJSON(){
+
+}
+
+/*
+* PARSE CSV FILES
+*/
+
+// Oscar
+var oscar = new Array();
+
+fs.createReadStream('reports/oscar.csv')
+  .pipe(csv())
+  .on('data', function(data) {
+    console.log('oscar', data);
+    oscar.push(data);
+  })
+// End Oscar
+
+// Invoca
+var invoca = new Array();
+
+fs.createReadStream('reports/invoca.csv')
+  .pipe(csv())
+  .on('data', function(data) {
+    console.log('invoca', data);
+    invoca.push(data);
+  })
+// End Invoca 
+
+var stream = csv();
+// Media Alpha
+var mediaalpha = new Array();
+//not absolutely coming in correctly need to tweak the header of the table
+fs.createReadStream('reports/mediaalpha.csv')
+  .pipe(csv())
+  .on('data', function(data) {
+    console.log('row', data);
+    mediaalpha.push(data);
+  })
+// End Media Alpha
+
+
+// Agile
+var agile = new Array();
+
+fs.createReadStream('reports/agile.csv')
+  .pipe(csv())
+  .on('data', function(data) {
+    console.log('agile', data);
+    agile.push(data);
+  })
+// End Agile
+
+
+
+
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname + '/public/index.html'));
@@ -89,46 +182,13 @@ module.exports = app;
 
 
 var parseCSVReports = function(){
-// Invoca
-var invoca = new Array();
 
-fs.createReadStream('reports/invoca.csv')
-  .pipe(csv())
-  .on('data', function(data) {
-    console.log('row', data);
-    invoca.push(data);
-  })
-// End Invoca 
-
-
-// Media Alpha
-var mediaalpha = new Array();
-//not absolutely coming in correctly need to tweak the header of the table
-fs.createReadStream('reports/mediaalpha.csv')
-  .pipe(csv())
-  .on('data', function(data) {
-    console.log('row', data);
-    mediaalpha.push(data);
-  })
-// End Media Alpha
-
-// Agile
-var agile = new Array();
-
-fs.createReadStream('reports/agile.csv')
-  .pipe(csv())
-  .on('data', function(data) {
-    console.log('row', data);
-    agile.push(data);
-  })
-// End Agile
 }
 
 
 var parseXLSXReports = function(){
   // E-Health
-  var workbook = XLSX.readFile(path.join(__dirname, 'ehealth.xls'));
-  console.log(workbook);
+  
 
   //
 }
