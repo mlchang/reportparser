@@ -1,25 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="reportApp">
 <head>
     <meta charset="UTF-8">
-    <title>Sample Site</title>
+    <title>HN Revenue Reporting</title>
     <link rel="stylesheet" href="/stylesheets/dropzone.css">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
     <style>
         body { padding-top:50px; }
     </style>
     <script type="text/javascript" src="/javascripts/dropzone.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script type="text/javascript" src="/javascripts/core.js"></script>
 </head>
 <body>
 
-    <div class="container">
+    <div class="container" ng-controller="mainController">
         <div class="jumbotron">
             <h1>HealthNetWork Revenue Reporting</h1>
         </div>
-    
-        <form id="upload-widget" method="post" action="/upload" class="dropzone">
+        {{test}}
+        <form id="upload-widget" method="post" action="/upload" class="dropzone" >
+            <select name="fileType">
+                <option selected="selected" value="">Select a partner</option>
+                <option value="Agile">Agile</option>
+                <option value="eHealth">eHealth</option>
+                <option value="GoHealth">GoHealth</option>
+                <option value="HealthMarkets">HealthMarkets</option>
+                <option value="Invoca">Invoca</option>
+                <option value="Katch">Katch</option>
+                <option value="Kelsey">Kelsey</option>
+                <option value="MediaAlpha">MediaAlpha</option>
+                <option value="Oscar">Oscar</option>
+            </select>
+            <div style="color : red;" ng-hide="validation">This file is invalid for the selected partner.</div>
+            <div>
+            </div>
         </form>
     </div>
 
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

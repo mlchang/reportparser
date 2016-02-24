@@ -12,12 +12,17 @@
     "express": "~4.13.1",
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "string.prototype.startswith": "^0.2.0"
   },
   "devDependencies": {
+    "async": "^1.5.2",
     "csv-parser": "^1.9.3",
     "excel-parser": "^0.2.2",
+    "express-handlebars": "^3.0.0",
     "gulp": "^3.9.1",
-    "gulp-util": "^3.0.7"
+    "gulp-util": "^3.0.7",
+    "image-size": "^0.4.0",
+    "multer": "^1.1.0"
   }
 }
